@@ -13,4 +13,7 @@ public abstract class Flight {
     protected int availableSeats;
     protected List<Passenger> passengers;
     protected List<CrewMember> crewMembers;
+
+
+
 }
