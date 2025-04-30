@@ -10,4 +10,7 @@ public abstract class Flight {
     protected String origin;
     protected String destination;
     protected double price;
+    protected int availableSeats;
+    protected List<Passenger> passengers;
+    protected List<CrewMember> crewMembers;
 }
