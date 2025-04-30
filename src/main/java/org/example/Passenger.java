@@ -22,11 +22,6 @@ public class Passenger extends User {
     }
 
     @Override
-    public String getUserType() {
-        return "Passenger";
-    }
-
-    @Override
     public boolean equals(Object o) {
         if (o == null || getClass() != o.getClass()) return false;
         if (!super.equals(o)) return false;

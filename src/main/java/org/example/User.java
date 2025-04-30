@@ -21,18 +21,11 @@ public abstract class User {
         this.gender = gender;
     }
 
-    public abstract String getUserType();
-
     @Override
     public boolean equals(Object o) {
         if (o == null || getClass() != o.getClass()) return false;
         User user = (User) o;
         return id == user.id && nextId == user.nextId && Objects.equals(name, user.name) && gender == user.gender;
-    }
-
-    @Override
-    public int hashCode() {
-        return Objects.hash(id, name, gender, nextId);
     }
 
     @Override
