@@ -6,19 +6,29 @@ public class Passenger extends User {
     private int passportNumber;
     private String nationality;
     private boolean ofAge;
+    private int seatNumber;
 
     public Passenger() {
         super();
         this.passportNumber = 0;
         this.nationality = null;
         this.ofAge = false;
+        this.seatNumber = 0;
     }
 
-    public Passenger(String name, Gender gender, int passportNumber, String nationality, boolean ofAge) {
+    public Passenger(int passportNumber, String nationality, boolean ofAge, int seatNumber) {
+        this.passportNumber = passportNumber;
+        this.nationality = nationality;
+        this.ofAge = ofAge;
+        this.seatNumber = seatNumber;
+    }
+
+    public Passenger(String name, Gender gender, int passportNumber, String nationality, boolean ofAge, int seatNumber) {
         super(name, gender);
         this.passportNumber = passportNumber;
         this.nationality = nationality;
         this.ofAge = ofAge;
+        this.seatNumber = seatNumber;
     }
 
     @Override
@@ -26,12 +36,12 @@ public class Passenger extends User {
         if (o == null || getClass() != o.getClass()) return false;
         if (!super.equals(o)) return false;
         Passenger passenger = (Passenger) o;
-        return passportNumber == passenger.passportNumber && ofAge == passenger.ofAge && Objects.equals(nationality, passenger.nationality);
+        return passportNumber == passenger.passportNumber && ofAge == passenger.ofAge && seatNumber == passenger.seatNumber && Objects.equals(nationality, passenger.nationality);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(super.hashCode(), passportNumber, nationality, ofAge);
+        return Objects.hash(super.hashCode(), passportNumber, nationality, ofAge, seatNumber);
     }
 
     @Override
@@ -40,7 +50,7 @@ public class Passenger extends User {
                 "passportNumber=" + passportNumber +
                 ", nationality='" + nationality + '\'' +
                 ", ofAge=" + ofAge +
-                ", id=" + id +
+                ", seatNumber=" + seatNumber +
                 ", name='" + name + '\'' +
                 ", gender=" + gender +
                 '}';

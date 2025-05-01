@@ -5,7 +5,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 
-public abstract class Flight {
+public abstract class Flight implements Comparable<Flight>{
     protected int flightId;
     protected LocalDateTime departureDateTime;
     protected LocalDateTime arrivalDateTime;
@@ -40,6 +40,11 @@ public abstract class Flight {
         this.availableSeats = availableSeats;
         this.passengers = passengers;
         this.crewMembers = crewMembers;
+    }
+
+    @Override
+    public int compareTo(Flight other) {
+        return this.flightId - other.flightId;
     }
 
     @Override

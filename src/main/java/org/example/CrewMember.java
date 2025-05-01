@@ -2,7 +2,7 @@ package org.example;
 
 import java.util.Objects;
 
-public class CrewMember extends User {
+public class CrewMember extends User implements Comparable<CrewMember>{
     protected boolean internationalWorker;
     protected int flightsHours;
 
@@ -19,6 +19,11 @@ public class CrewMember extends User {
     }
 
     @Override
+    public int compareTo(CrewMember other) {
+        return this.flightsHours - other.flightsHours;
+    }
+
+    @Override
     public boolean equals(Object o) {
         if (o == null || getClass() != o.getClass()) return false;
         if (!super.equals(o)) return false;
@@ -28,7 +33,7 @@ public class CrewMember extends User {
 
     @Override
     public int hashCode() {
-        return Objects.hash(internationalWorker, flightsHours);
+        return Objects.hash(super.hashCode(), internationalWorker, flightsHours);
     }
 
     @Override
@@ -36,7 +41,6 @@ public class CrewMember extends User {
         return "CrewMember{" +
                 "internationalWorker=" + internationalWorker +
                 ", flightsHours=" + flightsHours +
-                ", id=" + id +
                 ", name='" + name + '\'' +
                 ", gender=" + gender +
                 '}';

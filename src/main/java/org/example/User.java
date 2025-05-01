@@ -2,21 +2,16 @@ package org.example;
 
 import java.util.Objects;
 
-public abstract class User {
-    protected int id;
+public class User {
     protected String name;
     protected Gender gender;
 
-    protected static int nextId = 1;
-
     public User() {
-        this.id = nextId++;
         this.name = null;
         this.gender = null;
     }
 
     public User(String name, Gender gender) {
-        this.id = nextId++;
         this.name = name;
         this.gender = gender;
     }
@@ -25,16 +20,19 @@ public abstract class User {
     public boolean equals(Object o) {
         if (o == null || getClass() != o.getClass()) return false;
         User user = (User) o;
-        return id == user.id && nextId == user.nextId && Objects.equals(name, user.name) && gender == user.gender;
+        return Objects.equals(name, user.name) && gender == user.gender;
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(name, gender);
     }
 
     @Override
     public String toString() {
         return "User{" +
-                "id=" + id +
-                ", name='" + name + '\'' +
+                "name='" + name + '\'' +
                 ", gender=" + gender +
-                ", nextId=" + nextId +
                 '}';
     }
 
@@ -52,14 +50,6 @@ public abstract class User {
 
     public void setName(String name) {
         this.name = name;
-    }
-
-    public int getId() {
-        return id;
-    }
-
-    public void setId(int id) {
-        this.id = id;
     }
 
     enum Gender {

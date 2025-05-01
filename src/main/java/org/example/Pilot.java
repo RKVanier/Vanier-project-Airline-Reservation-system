@@ -3,8 +3,11 @@ package org.example;
 import java.util.Objects;
 
 public class Pilot extends CrewMember{
+    private int pilotId;
     private boolean internationalLicense;
     private CockpitRole cockpitRole;
+
+    private static int nextId = 1;
 
     public Pilot() {
         super();
@@ -23,25 +26,33 @@ public class Pilot extends CrewMember{
         if (o == null || getClass() != o.getClass()) return false;
         if (!super.equals(o)) return false;
         Pilot pilot = (Pilot) o;
-        return internationalLicense == pilot.internationalLicense && cockpitRole == pilot.cockpitRole;
+        return pilotId == pilot.pilotId && internationalLicense == pilot.internationalLicense && cockpitRole == pilot.cockpitRole;
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(super.hashCode(), internationalLicense, cockpitRole);
+        return Objects.hash(super.hashCode(), pilotId, internationalLicense, cockpitRole);
     }
 
     @Override
     public String toString() {
         return "Pilot{" +
-                "internationalLicense=" + internationalLicense +
+                "pilotId=" + pilotId +
+                ", internationalLicense=" + internationalLicense +
                 ", cockpitRole=" + cockpitRole +
                 ", internationalWorker=" + internationalWorker +
                 ", flightsHours=" + flightsHours +
-                ", id=" + id +
                 ", name='" + name + '\'' +
                 ", gender=" + gender +
                 '}';
+    }
+
+    public int getPilotId() {
+        return pilotId;
+    }
+
+    public void setPilotId(int pilotId) {
+        this.pilotId = pilotId;
     }
 
     public boolean isInternationalLicense() {
