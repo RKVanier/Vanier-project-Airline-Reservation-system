@@ -4,7 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 
-public class Passenger extends User {
+public class Passenger extends User implements Bookable{
     private int passportNumber;
     private String nationality;
     private boolean ofAge;
@@ -20,20 +20,23 @@ public class Passenger extends User {
         this.bookedFlights = new ArrayList<>();
     }
 
-    public Passenger(int passportNumber, String nationality, boolean ofAge, int seatNumber, List<Booking> bookedFlights) {
-        this.passportNumber = passportNumber;
-        this.nationality = nationality;
-        this.ofAge = ofAge;
-        this.seatNumber = seatNumber;
-        this.bookedFlights = bookedFlights;
-    }
-
     public Passenger(String name, Gender gender, int passportNumber, String nationality, boolean ofAge, int seatNumber) {
         super(name, gender);
         this.passportNumber = passportNumber;
         this.nationality = nationality;
         this.ofAge = ofAge;
         this.seatNumber = seatNumber;
+    }
+
+
+    @Override
+    public void book() {
+
+    }
+
+    @Override
+    public void cancel() {
+
     }
 
     @Override

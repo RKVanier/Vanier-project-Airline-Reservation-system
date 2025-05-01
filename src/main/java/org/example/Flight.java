@@ -2,10 +2,11 @@ package org.example;
 
 import java.time.LocalDateTime;
 import java.util.ArrayList;
+import java.util.Comparator;
 import java.util.List;
 import java.util.Objects;
 
-public abstract class Flight implements Comparable<Flight>{
+public abstract class Flight {
     protected int flightId;
     protected LocalDateTime departureDateTime;
     protected LocalDateTime arrivalDateTime;
@@ -43,11 +44,6 @@ public abstract class Flight implements Comparable<Flight>{
     }
 
     @Override
-    public int compareTo(Flight other) {
-        return this.flightId - other.flightId;
-    }
-
-    @Override
     public boolean equals(Object o) {
         if (o == null || getClass() != o.getClass()) return false;
         Flight flight = (Flight) o;
@@ -72,6 +68,35 @@ public abstract class Flight implements Comparable<Flight>{
                 ", passengers=" + passengers +
                 ", crewMembers=" + crewMembers +
                 '}';
+    }
+
+    public class FlightComparator implements Comparator<Flight>{
+        private FlightSortCriteria criteria;
+
+        public FlightComparator(FlightSortCriteria criteria) {
+            this.criteria = criteria;
+        }
+
+        @Override
+        public int compare(Flight f1, Flight f2) {
+            switch (criteria) {
+                case PRICE:
+                    return Double.compare(f1.getPrice(), f2.getPrice());
+                case FLIGHTID:
+                    return Integer.compare(f1.getFlightId(), f2.getFlightId());
+                case DESTINATION:
+                    return f1.getDestination().compareToIgnoreCase(f2.getDestination());
+                case DEPARTURETIME:
+                    return f1.getDepartureDateTime().compareTo(f2.getDepartureDateTime());
+                case ORIGIN:
+                    return f1.getOrigin().compareToIgnoreCase(f2.getOrigin());
+                case AVAILABLESEATS:
+                    return Integer.compare(f1.getAvailableSeats(), f2.getAvailableSeats());
+                default:
+                    return Integer.compare(f1.getFlightId(), f2.getFlightId());
+            }
+        }
+
     }
 
     public int getFlightId() {
@@ -144,5 +169,9 @@ public abstract class Flight implements Comparable<Flight>{
 
     public void setCrewMembers(List<CrewMember> crewMembers) {
         this.crewMembers = crewMembers;
+    }
+
+    public enum FlightSortCriteria {
+        PRICE, FLIGHTID, DESTINATION, DEPARTURETIME, ORIGIN, AVAILABLESEATS
     }
 }
