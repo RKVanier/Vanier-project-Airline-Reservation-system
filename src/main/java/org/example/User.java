@@ -52,7 +52,7 @@ public class User {
         this.name = name;
     }
 
-    enum Gender {
+    public enum Gender {
         MALE, FEMALE
     }
 }

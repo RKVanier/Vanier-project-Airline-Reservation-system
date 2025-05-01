@@ -71,7 +71,7 @@ public class Pilot extends CrewMember{
         this.cockpitRole = cockpitRole;
     }
 
-    enum CockpitRole{
+   public enum CockpitRole{
         PILOT, COPILOT
     }
 }

@@ -51,7 +51,7 @@ public class FlightAttendant extends CrewMember{
                 '}';
     }
 
-    enum Role {
+   public enum Role {
         SECURITY, COOK, ASSISTANCE, EMERGENCY
     }
 }
