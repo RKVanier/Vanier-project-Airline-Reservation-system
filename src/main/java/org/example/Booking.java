@@ -2,7 +2,7 @@ package org.example;
 
 import java.util.Objects;
 
-public class Booking {
+public class Booking implements Bookable{
     private int bookingId;
     private Flight flight;
     private Status status;
@@ -12,13 +12,23 @@ public class Booking {
     public Booking() {
         this.bookingId = nextId++;
         this.flight = null;
-        this.status = null;
+        this.status = Status.PROCESSING;
     }
 
     public Booking(Flight flight, Status status) {
         this.bookingId = nextId++;
         this.flight = flight;
         this.status = status;
+    }
+
+    @Override
+    public void book() {
+        this.status = Status.CONFIRMED;
+    }
+
+    @Override
+    public void cancel() {
+        this.status = Status.CANCELLED;
     }
 
     @Override
@@ -66,7 +76,9 @@ public class Booking {
         this.status = status;
     }
 
+
+
     public enum Status {
-        COMPLETED, PROCESSING, CANCELLED
+        CONFIRMED, PROCESSING, CANCELLED
     }
 }

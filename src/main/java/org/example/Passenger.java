@@ -1,5 +1,7 @@
 package org.example;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Objects;
 
 public class Passenger extends User {
@@ -7,6 +9,7 @@ public class Passenger extends User {
     private String nationality;
     private boolean ofAge;
     private int seatNumber;
+    private List<Booking> bookedFlights;
 
     public Passenger() {
         super();
@@ -14,13 +17,15 @@ public class Passenger extends User {
         this.nationality = null;
         this.ofAge = false;
         this.seatNumber = 0;
+        this.bookedFlights = new ArrayList<>();
     }
 
-    public Passenger(int passportNumber, String nationality, boolean ofAge, int seatNumber) {
+    public Passenger(int passportNumber, String nationality, boolean ofAge, int seatNumber, List<Booking> bookedFlights) {
         this.passportNumber = passportNumber;
         this.nationality = nationality;
         this.ofAge = ofAge;
         this.seatNumber = seatNumber;
+        this.bookedFlights = bookedFlights;
     }
 
     public Passenger(String name, Gender gender, int passportNumber, String nationality, boolean ofAge, int seatNumber) {
@@ -78,5 +83,21 @@ public class Passenger extends User {
 
     public void setOfAge(boolean ofAge) {
         this.ofAge = ofAge;
+    }
+
+    public int getSeatNumber() {
+        return seatNumber;
+    }
+
+    public void setSeatNumber(int seatNumber) {
+        this.seatNumber = seatNumber;
+    }
+
+    public List<Booking> getBookedFlights() {
+        return bookedFlights;
+    }
+
+    public void setBookedFlights(List<Booking> bookedFlights) {
+        this.bookedFlights = bookedFlights;
     }
 }

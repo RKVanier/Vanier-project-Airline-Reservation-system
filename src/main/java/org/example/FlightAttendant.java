@@ -51,7 +51,31 @@ public class FlightAttendant extends CrewMember{
                 '}';
     }
 
-   public enum Role {
+    public int getAttendantId() {
+        return attendantId;
+    }
+
+    public void setAttendantId(int attendantId) {
+        this.attendantId = attendantId;
+    }
+
+    public Role getRole() {
+        return role;
+    }
+
+    public void setRole(Role role) {
+        this.role = role;
+    }
+
+    public List<String> getLanguages() {
+        return languages;
+    }
+
+    public void setLanguages(List<String> languages) {
+        this.languages = languages;
+    }
+
+    public enum Role {
         SECURITY, COOK, ASSISTANCE, EMERGENCY
     }
 }
