@@ -21,11 +21,17 @@ public class Booking implements Bookable{
         this.status = status;
     }
 
+    /**
+     * A method to change the status of a booking to "CONFIRMED" which only an admin do
+     */
     @Override
     public void book() {
         this.status = Status.CONFIRMED;
     }
 
+    /**
+     * A method to change the status of a booking to "CANCELLED" which only an admin do
+     */
     @Override
     public void cancel() {
         this.status = Status.CANCELLED;

@@ -11,12 +11,14 @@ public class Pilot extends CrewMember{
 
     public Pilot() {
         super();
+        this.pilotId = nextId++;
         this.internationalLicense = false;
         this.cockpitRole = null;
     }
 
     public Pilot(String name, Gender gender, boolean internationalWorker, int flightsHours, boolean internationalLicense, CockpitRole cockpitRole) {
         super(name, gender, internationalWorker, flightsHours);
+        this.pilotId = nextId++;
         this.internationalLicense = internationalLicense;
         this.cockpitRole = cockpitRole;
     }

@@ -4,7 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 
-public class Passenger extends User implements Bookable{
+public class Passenger extends User {
     private int passportNumber;
     private String nationality;
     private boolean ofAge;
@@ -28,14 +28,22 @@ public class Passenger extends User implements Bookable{
         this.seatNumber = seatNumber;
     }
 
+    /**
+     * Requests to book a flight for the passenger.
+     * This method represents a booking request initiated by the passenger.
+     * The booking must be reviewed and authorized by an admin before it is finalized.
+     */
 
-    @Override
-    public void book() {
+    public void book(Booking booking) {
 
     }
 
-    @Override
-    public void cancel() {
+    /**
+     * Requests to cancel a flight booking for the passenger.
+     * This cancellation request should also be confirmed or processed by an admin
+     * to update the system records accordingly.
+     */
+    public void cancel(Booking booking) {
 
     }
 

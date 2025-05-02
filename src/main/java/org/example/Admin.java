@@ -4,7 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 
-public class Admin extends User implements Bookable{
+public class Admin extends User {
     private int id;
     private List<Booking> managedBookings;
 
@@ -23,19 +23,24 @@ public class Admin extends User implements Bookable{
 
     /**
      * Change the status of the booking as only the Admin can do this (Confirmed status)
-     * and adds it to the bookings
+     * and adds it to the bookings and then calls a method to rewrite the data in a file
      */
-    @Override
-    public void book() {
+    public void book(Booking booking) {
 
     }
 
     /**
      * Change the status of the booking as only the Admin can do this (Canceled status)
-     * and adds it to the booking
+     * and adds it to the booking and then calls a method to rewrite the data in a file
      */
-    @Override
-    public void cancel() {
+    public void cancel(Booking booking) {
+
+    }
+
+    /**
+     * Writes all the bookings in a file to keep records of them by using text IO
+     */
+    public void generateReport() {
 
     }
 

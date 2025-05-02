@@ -4,7 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 
-public class FlightAttendant extends CrewMember{
+public class FlightAttendant extends CrewMember implements Comparable<CrewMember> {
     private int attendantId;
     private Role role;
     private List<String> languages;
@@ -23,6 +23,15 @@ public class FlightAttendant extends CrewMember{
         this.attendantId = nextId++;
         this.role = role;
         this.languages = languages;
+    }
+
+    @Override
+    public int compareTo(CrewMember other) {
+
+        if (other instanceof FlightAttendant flightAttendant) {
+            return this.attendantId - flightAttendant.attendantId;
+        }
+        return super.compareTo(other);
     }
 
     @Override

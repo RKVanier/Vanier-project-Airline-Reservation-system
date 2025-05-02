@@ -15,10 +15,18 @@ public class FlightManager {
         this.flights = flights;
     }
 
+    /**
+     * Adds a flight to the list of flights
+     * @param flight
+     */
     public void addFlight(Flight flight) {
         flights.add(flight);
     }
 
+    /**
+     * Finds all the flights that have still available seats and put them in a list
+     * @return available which is a list of flights that have available space for one more passenger at least
+     */
     public List<Flight> getAvailableFlights() {
         List<Flight> available = new ArrayList<>();
         for (Flight flight : flights) {

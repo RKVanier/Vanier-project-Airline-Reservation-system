@@ -77,6 +77,12 @@ public abstract class Flight {
             this.criteria = criteria;
         }
 
+        /**
+         * Compares the flights depending on the criteria chosen
+         * @param f1 the first object to be compared.
+         * @param f2 the second object to be compared.
+         * @return
+         */
         @Override
         public int compare(Flight f1, Flight f2) {
             switch (criteria) {
