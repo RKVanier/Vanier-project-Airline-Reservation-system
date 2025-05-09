@@ -35,7 +35,8 @@ public class Passenger extends User {
      */
 
     public void book(Booking booking) {
-
+        booking.getAdmin().book(booking, this);
+        bookedFlights.add(booking);
     }
 
     /**
@@ -44,7 +45,8 @@ public class Passenger extends User {
      * to update the system records accordingly.
      */
     public void cancel(Booking booking) {
-
+        booking.getAdmin().cancel(booking, this);
+        bookedFlights.remove(booking);
     }
 
     @Override
