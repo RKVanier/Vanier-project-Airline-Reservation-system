@@ -6,6 +6,7 @@ public class Booking implements Bookable{
     private int bookingId;
     private Flight flight;
     private Status status;
+    private Admin admin;
 
     private static int nextId = 1;
 
@@ -13,12 +14,14 @@ public class Booking implements Bookable{
         this.bookingId = nextId++;
         this.flight = null;
         this.status = Status.PROCESSING;
+        admin = null;
     }
 
-    public Booking(Flight flight, Status status) {
+    public Booking(Flight flight, Status status, Admin admin) {
         this.bookingId = nextId++;
         this.flight = flight;
         this.status = status;
+        this.admin = admin;
     }
 
     /**
@@ -82,7 +85,13 @@ public class Booking implements Bookable{
         this.status = status;
     }
 
+    public Admin getAdmin() {
+        return admin;
+    }
 
+    public void setAdmin(Admin admin) {
+        this.admin = admin;
+    }
 
     public enum Status {
         CONFIRMED, PROCESSING, CANCELLED

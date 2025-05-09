@@ -6,19 +6,17 @@ import java.util.Objects;
 
 public class Admin extends User {
     private int id;
-    private List<Booking> managedBookings;
 
     private static int nextId = 1;
 
     public Admin() {
         this.id = nextId++;
-        this.managedBookings = new ArrayList<>();
+
     }
 
-    public Admin(String name, Gender gender, int id, List<Booking> managedBookings) {
+    public Admin(String name, Gender gender, int id) {
         super(name, gender);
         this.id = nextId++;
-        this.managedBookings = managedBookings;
     }
 
     /**
@@ -34,7 +32,8 @@ public class Admin extends User {
      * and adds it to the booking and then calls a method to rewrite the data in a file
      */
     public void cancel(Booking booking) {
-
+        booking.cancel();
+        booking.getFlight().availableSeats++;
     }
 
     /**
@@ -49,20 +48,18 @@ public class Admin extends User {
         if (o == null || getClass() != o.getClass()) return false;
         if (!super.equals(o)) return false;
         Admin admin = (Admin) o;
-        return id == admin.id && Objects.equals(managedBookings, admin.managedBookings);
+        return id == admin.id;
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(super.hashCode(), id, managedBookings);
+        return Objects.hash(super.hashCode(), id);
     }
 
     @Override
     public String toString() {
         return "Admin{" +
-                "id=" + id +
-                ", managedBookings=" + managedBookings +
-                ", name='" + name + '\'' +
+                "name='" + name + '\'' +
                 ", gender=" + gender +
                 '}';
     }
@@ -75,11 +72,4 @@ public class Admin extends User {
         this.id = id;
     }
 
-    public List<Booking> getManagedBookings() {
-        return managedBookings;
-    }
-
-    public void setManagedBookings(List<Booking> managedBookings) {
-        this.managedBookings = managedBookings;
-    }
 }

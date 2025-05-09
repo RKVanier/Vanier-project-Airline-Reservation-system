@@ -70,7 +70,7 @@ public abstract class Flight {
                 '}';
     }
 
-    public class FlightComparator implements Comparator<Flight>{
+    public static class FlightComparator implements Comparator<Flight>{
         private FlightSortCriteria criteria;
 
         public FlightComparator(FlightSortCriteria criteria) {
