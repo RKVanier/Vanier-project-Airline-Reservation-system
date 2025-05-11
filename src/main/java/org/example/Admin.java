@@ -1,8 +1,5 @@
 package org.example;
 
-import java.io.File;
-import java.io.FileWriter;
-import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
@@ -29,54 +26,35 @@ public class Admin extends User {
      * Change the status of the booking as only the Admin can do this (Confirmed status)
      * and adds it to the bookings and then calls a method to rewrite the data in a file
      */
-    public void book(Booking booking, Passenger passenger) {
-        if (booking.getFlight().availableSeats > 0) {
-            booking.book();
-            booking.getFlight().passengers.add(passenger);
-            booking.getFlight().availableSeats--;
-            managedBooking.add(booking);
-            generateReport();
-        } else {
-            System.out.println("No more available seats. Try to book another flight.");
-        }
+    public void reviewBooking(Booking booking, Passenger passenger) {
+
+            if (booking.getFlight().availableSeats > 0) {
+                booking.book();
+                booking.getFlight().passengers.add(passenger);
+                booking.getFlight().availableSeats--;
+                managedBooking.add(booking);
+                BookingSystem.addBooking(booking);
+                BookingSystem.generateReport();
+            }
+            Booking booking1 = null;
+            booking1.book();
+
     }
 
     /**
      * Change the status of the booking as only the Admin can do this (Canceled status)
      * and adds it to the booking and then calls a method to rewrite the data in a file
      */
-    public void cancel(Booking booking, Passenger passenger) {
+    public void reviewCancelling(Booking booking, Passenger passenger) {
+        if (booking == null) {
+            return;
+        }
+
         booking.cancel();
         booking.getFlight().passengers.remove(passenger);
         booking.getFlight().availableSeats++;
-        generateReport();
-    }
+        BookingSystem.generateReport();
 
-    /**
-     * Writes all the bookings in a file to keep records of them by using text O
-     */
-    public void generateReport() {
-        managedBooking.sort((b1, b2) -> b1.getBookingId() - b2.getBookingId());
-        File bookingReport = new File("src/main/resources/BookingReport");
-        try (FileWriter fileWriter = new FileWriter(bookingReport)) {
-            for (Booking booking : managedBooking) {
-                int bookingId = booking.getBookingId();
-                String status = booking.getStatus().toString();
-                int adminId = this.id;
-                String name = this.name;
-                Gender gender = this.gender;
-                int flightId = booking.getFlight().flightId;
-                String origin = booking.getFlight().origin;
-                String destination = booking.getFlight().destination;
-                double price = booking.getFlight().price;
-                int numberPassenger = booking.getFlight().getPassengers().size();
-                int numberCrew = booking.getFlight().getCrewMembers().size();
-                fileWriter.write(bookingId + "," + status + "," + adminId + "," + name + "," + gender + "," + flightId + "," + origin + "," + destination + "," + price + "," + numberPassenger + "," + numberCrew);
-                fileWriter.write("\n");
-            }
-        } catch (IOException e) {
-            throw new RuntimeException(e);
-        }
     }
 
     @Override

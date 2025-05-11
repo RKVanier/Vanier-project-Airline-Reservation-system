@@ -6,7 +6,7 @@ import java.util.Comparator;
 import java.util.List;
 import java.util.Objects;
 
-public abstract class Flight {
+public abstract class Flight{
     protected int flightId;
     protected LocalDateTime departureDateTime;
     protected LocalDateTime arrivalDateTime;

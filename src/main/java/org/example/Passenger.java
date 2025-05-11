@@ -34,9 +34,11 @@ public class Passenger extends User {
      * The booking must be reviewed and authorized by an admin before it is finalized.
      */
 
-    public void book(Booking booking) {
-        booking.getAdmin().book(booking, this);
+    public void RequestBooking(Flight flight, Admin admin) {
+        Booking booking = new Booking();
+        booking.getAdmin().reviewBooking(booking, this);
         bookedFlights.add(booking);
+
     }
 
     /**
@@ -44,8 +46,8 @@ public class Passenger extends User {
      * This cancellation request should also be confirmed or processed by an admin
      * to update the system records accordingly.
      */
-    public void cancel(Booking booking) {
-        booking.getAdmin().cancel(booking, this);
+    public void RequestCancel(Booking booking) {
+        booking.getAdmin().reviewBooking(booking, this);
         bookedFlights.remove(booking);
     }
 

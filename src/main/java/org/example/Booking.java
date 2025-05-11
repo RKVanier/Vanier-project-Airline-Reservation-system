@@ -14,7 +14,7 @@ public class Booking implements Bookable{
         this.bookingId = nextId++;
         this.flight = null;
         this.status = Status.PROCESSING;
-        admin = null;
+        this.admin = null;
     }
 
     public Booking(Flight flight, Status status, Admin admin) {
