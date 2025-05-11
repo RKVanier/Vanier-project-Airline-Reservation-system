@@ -5,11 +5,7 @@ import java.util.List;
 import java.util.Objects;
 
 public class FlightManager {
-    private List<Flight> flights;
-
-    public FlightManager() {
-        this.flights = new ArrayList<>();
-    }
+    private static List<Flight> flights = new ArrayList<>();
 
     public FlightManager(List<Flight> flights) {
         this.flights = flights;

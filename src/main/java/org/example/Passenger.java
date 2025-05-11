@@ -36,6 +36,7 @@ public class Passenger extends User {
 
     public void RequestBooking(Flight flight, Admin admin) {
         Booking booking = new Booking();
+        booking.setFlight(flight);
         booking.getAdmin().reviewBooking(booking, this);
         bookedFlights.add(booking);
 

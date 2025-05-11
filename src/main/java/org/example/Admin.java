@@ -30,14 +30,13 @@ public class Admin extends User {
 
             if (booking.getFlight().availableSeats > 0) {
                 booking.book();
+                booking.setPassenger(passenger);
                 booking.getFlight().passengers.add(passenger);
                 booking.getFlight().availableSeats--;
                 managedBooking.add(booking);
                 BookingSystem.addBooking(booking);
                 BookingSystem.generateReport();
             }
-            Booking booking1 = null;
-            booking1.book();
 
     }
 

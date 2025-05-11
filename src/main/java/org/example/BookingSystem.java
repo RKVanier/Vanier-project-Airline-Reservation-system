@@ -5,7 +5,6 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Objects;
 
 public class BookingSystem {
     private static List<Booking> bookings = new ArrayList<>();
@@ -14,6 +13,10 @@ public class BookingSystem {
         BookingSystem.bookings = bookings;
     }
 
+    /**
+     * Adding a booking to the database of all bookings
+     * @param booking the booking you want to add to the database
+     */
     public static void addBooking(Booking booking) {
         bookings.add(booking);
     }
@@ -26,6 +29,7 @@ public class BookingSystem {
         File bookingReport = new File("src/main/resources/BookingReport");
         try (FileWriter fileWriter = new FileWriter(bookingReport)) {
             for (Booking booking : bookings) {
+                String passengerName = booking.getPassenger().name;
                 int bookingId = booking.getBookingId();
                 String status = booking.getStatus().toString();
                 int adminId = booking.getAdmin().getId();
@@ -37,17 +41,12 @@ public class BookingSystem {
                 double price = booking.getFlight().price;
                 int numberPassenger = booking.getFlight().getPassengers().size();
                 int numberCrew = booking.getFlight().getCrewMembers().size();
-                fileWriter.write(bookingId + "," + status + "," + adminId + "," + name + "," + gender + "," + flightId + "," + origin + "," + destination + "," + price + "," + numberPassenger + "," + numberCrew);
+                fileWriter.write(bookingId + "," + passengerName + "," + status + "," + adminId + "," + name + "," + gender + "," + flightId + "," + origin + "," + destination + "," + price + "," + numberPassenger + "," + numberCrew);
                 fileWriter.write("\n");
             }
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
-    }
-
-    @Override
-    public int hashCode() {
-        return Objects.hashCode(bookings);
     }
 
     @Override

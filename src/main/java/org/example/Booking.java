@@ -6,6 +6,7 @@ public class Booking implements Bookable{
     private int bookingId;
     private Flight flight;
     private Status status;
+    private Passenger passenger;
     private Admin admin;
 
     private static int nextId = 1;
@@ -14,13 +15,15 @@ public class Booking implements Bookable{
         this.bookingId = nextId++;
         this.flight = null;
         this.status = Status.PROCESSING;
+        this.passenger = null;
         this.admin = null;
     }
 
-    public Booking(Flight flight, Status status, Admin admin) {
+    public Booking(Flight flight, Status status, Passenger passenger,Admin admin) {
         this.bookingId = nextId++;
         this.flight = flight;
         this.status = status;
+        this.passenger = passenger;
         this.admin = admin;
     }
 
@@ -44,12 +47,12 @@ public class Booking implements Bookable{
     public boolean equals(Object o) {
         if (o == null || getClass() != o.getClass()) return false;
         Booking booking = (Booking) o;
-        return bookingId == booking.bookingId && Objects.equals(flight, booking.flight) && status == booking.status;
+        return bookingId == booking.bookingId && Objects.equals(flight, booking.flight) && status == booking.status && Objects.equals(passenger, booking.passenger) && Objects.equals(admin, booking.admin);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(bookingId, flight, status);
+        return Objects.hash(bookingId, flight, status, passenger, admin);
     }
 
     @Override
@@ -58,6 +61,8 @@ public class Booking implements Bookable{
                 "bookingId=" + bookingId +
                 ", flight=" + flight +
                 ", status=" + status +
+                ", passenger=" + passenger +
+                ", admin=" + admin +
                 '}';
     }
 
@@ -83,6 +88,14 @@ public class Booking implements Bookable{
 
     public void setStatus(Status status) {
         this.status = status;
+    }
+
+    public Passenger getPassenger() {
+        return passenger;
+    }
+
+    public void setPassenger(Passenger passenger) {
+        this.passenger = passenger;
     }
 
     public Admin getAdmin() {
