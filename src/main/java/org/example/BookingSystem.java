@@ -18,7 +18,10 @@ public class BookingSystem {
      * @param booking the booking you want to add to the database
      */
     public static void addBooking(Booking booking) {
-        bookings.add(booking);
+        if (booking != null) {
+            bookings.add(booking);
+        }
+
     }
 
     /**
@@ -29,20 +32,22 @@ public class BookingSystem {
         File bookingReport = new File("src/main/resources/BookingReport");
         try (FileWriter fileWriter = new FileWriter(bookingReport)) {
             for (Booking booking : bookings) {
-                String passengerName = booking.getPassenger().name;
-                int bookingId = booking.getBookingId();
-                String status = booking.getStatus().toString();
-                int adminId = booking.getAdmin().getId();
-                String name = booking.getAdmin().getName();
-                User.Gender gender = booking.getAdmin().gender;
-                int flightId = booking.getFlight().flightId;
-                String origin = booking.getFlight().origin;
-                String destination = booking.getFlight().destination;
-                double price = booking.getFlight().price;
-                int numberPassenger = booking.getFlight().getPassengers().size();
-                int numberCrew = booking.getFlight().getCrewMembers().size();
-                fileWriter.write(bookingId + "," + passengerName + "," + status + "," + adminId + "," + name + "," + gender + "," + flightId + "," + origin + "," + destination + "," + price + "," + numberPassenger + "," + numberCrew);
-                fileWriter.write("\n");
+                if (booking != null) {
+                    String passengerName = booking.getPassenger().name;
+                    int bookingId = booking.getBookingId();
+                    String status = booking.getStatus().toString();
+                    int adminId = booking.getAdmin().getId();
+                    String name = booking.getAdmin().getName();
+                    User.Gender gender = booking.getAdmin().gender;
+                    int flightId = booking.getFlight().flightId;
+                    String origin = booking.getFlight().origin;
+                    String destination = booking.getFlight().destination;
+                    double price = booking.getFlight().price;
+                    int numberPassenger = booking.getFlight().getPassengers().size();
+                    int numberCrew = booking.getFlight().getCrewMembers().size();
+                    fileWriter.write(bookingId + "," + passengerName + "," + status + "," + adminId + "," + name + "," + gender + "," + flightId + "," + origin + "," + destination + "," + price + "," + numberPassenger + "," + numberCrew);
+                    fileWriter.write("\n");
+                }
             }
         } catch (IOException e) {
             throw new RuntimeException(e);

@@ -4,7 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 
-public class FlightAttendant extends CrewMember implements Comparable<CrewMember> {
+public class FlightAttendant extends CrewMember {
     private int attendantId;
     private Role role;
     private List<String> languages;

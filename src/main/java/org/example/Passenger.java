@@ -35,11 +35,12 @@ public class Passenger extends User {
      */
 
     public void RequestBooking(Flight flight, Admin admin) {
-        Booking booking = new Booking();
-        booking.setFlight(flight);
-        booking.getAdmin().reviewBooking(booking, this);
-        bookedFlights.add(booking);
-
+        if (flight != null && admin != null) {
+            Booking booking = new Booking();
+            booking.setFlight(flight);
+            booking.getAdmin().reviewBooking(booking, this);
+            bookedFlights.add(booking);
+        }
     }
 
     /**
@@ -48,8 +49,10 @@ public class Passenger extends User {
      * to update the system records accordingly.
      */
     public void RequestCancel(Booking booking) {
-        booking.getAdmin().reviewBooking(booking, this);
-        bookedFlights.remove(booking);
+        if (booking != null && bookedFlights.contains(booking)) {
+            booking.getAdmin().reviewBooking(booking, this);
+            bookedFlights.remove(booking);
+        }
     }
 
     @Override

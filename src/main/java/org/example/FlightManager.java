@@ -15,7 +15,7 @@ public class FlightManager {
      * Adds a flight to the list of flights
      * @param flight
      */
-    public void addFlight(Flight flight) {
+    public static void addFlight(Flight flight) {
         flights.add(flight);
     }
 
@@ -23,11 +23,13 @@ public class FlightManager {
      * Finds all the flights that have still available seats and put them in a list
      * @return available which is a list of flights that have available space for one more passenger at least
      */
-    public List<Flight> getAvailableFlights() {
+    public static List<Flight> getAvailableFlights() {
         List<Flight> available = new ArrayList<>();
         for (Flight flight : flights) {
-            if (flight.getAvailableSeats() > 0) {
-                available.add(flight);
+            if (flight != null) {
+                if (flight.getAvailableSeats() > 0) {
+                    available.add(flight);
+                }
             }
         }
         return available;
@@ -52,7 +54,7 @@ public class FlightManager {
                 '}';
     }
 
-    public List<Flight> getFlights() {
+    public static List<Flight> getFlights() {
         return flights;
     }
 

@@ -28,16 +28,17 @@ public class Admin extends User {
      */
     public void reviewBooking(Booking booking, Passenger passenger) {
 
-            if (booking.getFlight().availableSeats > 0) {
-                booking.book();
-                booking.setPassenger(passenger);
-                booking.getFlight().passengers.add(passenger);
-                booking.getFlight().availableSeats--;
-                managedBooking.add(booking);
-                BookingSystem.addBooking(booking);
-                BookingSystem.generateReport();
+            if (booking != null) {
+                if (booking.getFlight().availableSeats > 0) {
+                    booking.book();
+                    booking.setPassenger(passenger);
+                    booking.getFlight().passengers.add(passenger);
+                    booking.getFlight().availableSeats--;
+                    managedBooking.add(booking);
+                    BookingSystem.addBooking(booking);
+                    BookingSystem.generateReport();
+                }
             }
-
     }
 
     /**
@@ -45,15 +46,12 @@ public class Admin extends User {
      * and adds it to the booking and then calls a method to rewrite the data in a file
      */
     public void reviewCancelling(Booking booking, Passenger passenger) {
-        if (booking == null) {
-            return;
+        if (booking != null && booking.getFlight() != null && booking.getFlight().passengers.contains(passenger)) {
+            booking.cancel();
+            booking.getFlight().passengers.remove(passenger);
+            booking.getFlight().availableSeats++;
+            BookingSystem.generateReport();
         }
-
-        booking.cancel();
-        booking.getFlight().passengers.remove(passenger);
-        booking.getFlight().availableSeats++;
-        BookingSystem.generateReport();
-
     }
 
     @Override

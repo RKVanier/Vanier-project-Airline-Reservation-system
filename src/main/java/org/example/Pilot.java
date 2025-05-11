@@ -24,6 +24,14 @@ public class Pilot extends CrewMember{
     }
 
     @Override
+    public int compareTo(CrewMember other) {
+        if (other instanceof Pilot pilot) {
+            return this.pilotId - ((Pilot) other).pilotId;
+        }
+        return super.compareTo(other);
+    }
+
+    @Override
     public boolean equals(Object o) {
         if (o == null || getClass() != o.getClass()) return false;
         if (!super.equals(o)) return false;
