@@ -12,7 +12,7 @@ public class AdminTest {
     @Test
     public void testReviewBooking_confirmsBooking() {
         Admin admin = new Admin();
-        Passenger passenger = new Passenger("John Doe", User.Gender.MALE, 123456, "Canadian", true, 12);
+        Passenger passenger = new Passenger("John Doe", User.Gender.MALE, 123456, "Canadian", true, new ArrayList<>());
         List<Passenger> passengers = new ArrayList<>();
         List<CrewMember> crew = new ArrayList<>();
         InternationalFlight flight = new InternationalFlight(LocalDateTime.now(), LocalDateTime.now().plusHours(2), "Toronto", "Paris", 500.0, 5, passengers, crew, true);
@@ -29,7 +29,7 @@ public class AdminTest {
     @Test
     public void testReviewBooking_doesNothingIfNoSeats() {
         Admin admin = new Admin();
-        Passenger passenger = new Passenger("Alice", User.Gender.FEMALE, 654321, "French", true, 15);
+        Passenger passenger = new Passenger("Alice", User.Gender.FEMALE, 654321, "French", true, new ArrayList<>());
         List<Passenger> passengers = new ArrayList<>();
         List<CrewMember> crew = new ArrayList<>();
         InternationalFlight flight = new InternationalFlight(LocalDateTime.now(), LocalDateTime.now().plusHours(3), "Berlin", "London", 300.0, 0, passengers, crew, false);
@@ -46,7 +46,7 @@ public class AdminTest {
     @Test
     public void testReviewCancelling_removesPassengerAndIncreasesSeats() {
         Admin admin = new Admin();
-        Passenger passenger = new Passenger("David", User.Gender.MALE, 111222, "USA", true, 9);
+        Passenger passenger = new Passenger("David", User.Gender.MALE, 111222, "USA", true, new ArrayList<>());
         List<Passenger> passengers = new ArrayList<>();
         passengers.add(passenger);
         List<CrewMember> crew = new ArrayList<>();

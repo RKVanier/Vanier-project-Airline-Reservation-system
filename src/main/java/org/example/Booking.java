@@ -51,11 +51,6 @@ public class Booking implements Bookable{
     }
 
     @Override
-    public int hashCode() {
-        return Objects.hash(bookingId, flight, status, passenger, admin);
-    }
-
-    @Override
     public String toString() {
         return "Booking{" +
                 "bookingId=" + bookingId +
@@ -64,6 +59,11 @@ public class Booking implements Bookable{
                 ", passenger=" + passenger +
                 ", admin=" + admin +
                 '}';
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(bookingId, flight, status, passenger, admin);
     }
 
     public int getBookingId() {

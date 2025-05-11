@@ -61,7 +61,7 @@ public class BookingSystem {
                 '}';
     }
 
-    public List<Booking> getBookings() {
+    public static List<Booking> getBookings() {
         return bookings;
     }
 

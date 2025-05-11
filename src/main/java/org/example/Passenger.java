@@ -8,7 +8,6 @@ public class Passenger extends User {
     private int passportNumber;
     private String nationality;
     private boolean ofAge;
-    private int seatNumber;
     private List<Booking> bookedFlights;
 
     public Passenger() {
@@ -16,16 +15,15 @@ public class Passenger extends User {
         this.passportNumber = 0;
         this.nationality = null;
         this.ofAge = false;
-        this.seatNumber = 0;
         this.bookedFlights = new ArrayList<>();
     }
 
-    public Passenger(String name, Gender gender, int passportNumber, String nationality, boolean ofAge, int seatNumber) {
+    public Passenger(String name, Gender gender, int passportNumber, String nationality, boolean ofAge, List<Booking> bookedFlights) {
         super(name, gender);
         this.passportNumber = passportNumber;
         this.nationality = nationality;
         this.ofAge = ofAge;
-        this.seatNumber = seatNumber;
+        this.bookedFlights = bookedFlights;
     }
 
     /**
@@ -34,12 +32,12 @@ public class Passenger extends User {
      * The booking must be reviewed and authorized by an admin before it is finalized.
      */
 
-    public void RequestBooking(Flight flight, Admin admin) {
+    public void requestBooking(Flight flight, Admin admin) {
         if (flight != null && admin != null) {
             Booking booking = new Booking();
             booking.setFlight(flight);
+            booking.setAdmin(admin);
             booking.getAdmin().reviewBooking(booking, this);
-            bookedFlights.add(booking);
         }
     }
 
@@ -48,10 +46,9 @@ public class Passenger extends User {
      * This cancellation request should also be confirmed or processed by an admin
      * to update the system records accordingly.
      */
-    public void RequestCancel(Booking booking) {
+    public void requestCancel(Booking booking) {
         if (booking != null && bookedFlights.contains(booking)) {
-            booking.getAdmin().reviewBooking(booking, this);
-            bookedFlights.remove(booking);
+            booking.getAdmin().reviewCancelling(booking, this);
         }
     }
 
@@ -60,12 +57,12 @@ public class Passenger extends User {
         if (o == null || getClass() != o.getClass()) return false;
         if (!super.equals(o)) return false;
         Passenger passenger = (Passenger) o;
-        return passportNumber == passenger.passportNumber && ofAge == passenger.ofAge && seatNumber == passenger.seatNumber && Objects.equals(nationality, passenger.nationality);
+        return passportNumber == passenger.passportNumber && ofAge == passenger.ofAge && Objects.equals(nationality, passenger.nationality);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(super.hashCode(), passportNumber, nationality, ofAge, seatNumber);
+        return Objects.hash(super.hashCode(), passportNumber, nationality, ofAge);
     }
 
     @Override
@@ -74,7 +71,6 @@ public class Passenger extends User {
                 "passportNumber=" + passportNumber +
                 ", nationality='" + nationality + '\'' +
                 ", ofAge=" + ofAge +
-                ", seatNumber=" + seatNumber +
                 ", name='" + name + '\'' +
                 ", gender=" + gender +
                 '}';
@@ -102,14 +98,6 @@ public class Passenger extends User {
 
     public void setOfAge(boolean ofAge) {
         this.ofAge = ofAge;
-    }
-
-    public int getSeatNumber() {
-        return seatNumber;
-    }
-
-    public void setSeatNumber(int seatNumber) {
-        this.seatNumber = seatNumber;
     }
 
     public List<Booking> getBookedFlights() {
